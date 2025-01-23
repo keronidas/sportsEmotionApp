@@ -1,0 +1,27 @@
+<div class="flex w-full h-full justify-center items-center">
+
+    <table class="w-4/5 table-auto p-6 border-separate border-spacing-y-1">
+        <thead>
+            <tr class=" text-gray-600">
+                <th class="px-4 py-2 border-b text-left font-light">User Id</th>
+                <th class="px-4 py-2 border-b text-left font-light">Name</th>
+                <th class="px-4 py-2 border-b text-left font-light">Username</th>
+                <th class="px-4 py-2 border-b text-left font-light">Email</th>
+                <th class="px-4 py-2 border-b text-left font-light">Phone</th>
+                <th class="px-4 py-2 border-b text-left font-light">Check Task</th>
+            </tr>
+        </thead>
+        <tbody class="gap-y-1">
+            @for(user of users;track user){
+            <tr class="odd:bg-[#e9f7e6] even:bg-white  rounded-3xl">
+                <td class="px-4 py-2  ">{{user.id}}</td>
+                <td class="px-4 py-2  ">{{user.name}}</td>
+                <td class="px-4 py-2  ">{{user.username}}</td>
+                <td class="px-4 py-2  ">{{user.email}}</td>
+                <td class="px-4 py-2  ">{{user.phone}}</td>
+                <td class="px-4 py-2  "> <button class="bg-[#42a274] py-2 px-6 rounded-2xl font-bold">Check</button> </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

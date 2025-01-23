@@ -1,0 +1,18 @@
+import { inject, Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { UsersDto } from '../interfaces/user.interface';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UsersService {
+ private http=inject(HttpClient)
+  private apiUrl = environment.apiUrl + '/users';
+ 
+
+  getUsers(): Observable<UsersDto> {
+    return this.http.get<UsersDto>(this.apiUrl)
+  }
+}

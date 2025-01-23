@@ -1,0 +1,24 @@
+<div class="flex flex-col w-full h-full ">
+    <div class="flex flex-col  w-full h-full items-center">
+        @for( ruta of routes;track ruta){
+        <div class="flex flex-col justify-center items-center rounded-lg text-white hover:text-black hover:bg-white max-w-fit p-1 mt-4 mb-4 min-w-12 min-h-12 hover:cursor-pointer"
+            [routerLink]=ruta.url routerLinkActive="activated-route" [routerLinkActiveOptions]="{exact:true}">
+            <img [src]=ruta.img alt="no hay" class="w-8 h-8">
+
+            <!-- Si queremos agregar texto -->
+            <!-- Habria que aumentar el tamaño del div -->
+
+            <!-- <li class="list-none "><span class="capitalize text-base">{{ruta.name}}</span></li> -->
+
+
+        </div>
+        }
+    </div>
+    <div class="flex flex-col justify-center gap-y-14 items-center  w-full h-full ">
+        <img src="people.png" alt="img logo" class="w-12 h-12 ">
+        <div class=" rotate-90 mb-2 ">
+            <p class="text-lg text-white font-semibold">Diego Julián</p>
+            <p class="text-sm text-white font-thin">Frontend Developer</p>
+        </div>
+    </div>
+</div>
