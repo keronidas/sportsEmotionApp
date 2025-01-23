@@ -38,7 +38,13 @@
         <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons aria-label="Select page of periodic elements">
         </mat-paginator>
     </div>
-    <div class="w-1/5">
-
+    <div class="w-1/5 flex flex-col justify-center items-center">
+        <div class="flex flex-col justify-center items-center">
+            <p-chart type="pie" [data]="dataChartJs" [options]="options"></p-chart>
+            <div class="p-2">
+                <p>Num likes: {{ completed }}</p>
+                <p>Num dislikes: {{ notCompleted }}</p>
+            </div>
+        </div>
     </div>
 </div>
