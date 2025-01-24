@@ -4,25 +4,29 @@ import { TasksDto } from '../../interfaces/task.interface';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ChartModule } from 'primeng/chart';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-tasks',
-  imports: [MatTableModule, MatPaginatorModule, ChartModule],
+  imports: [MatTableModule, MatPaginatorModule, ChartModule, MatSortModule],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements AfterViewInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+
   dataChartJs: any;
+  sortedData!: TasksDto[];
   options: any;
   completed: number = 0;
   notCompleted: number = 0;
-  public taskService = inject(TasksService);
   tasks: TasksDto[] = [];
   displayedColumns: string[] = ['userId', 'id', 'title', 'completed', 'button'];
   dataSource!: MatTableDataSource<TasksDto>;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+
+  public taskService = inject(TasksService);
 
   ngAfterViewInit(): void {
 
@@ -89,4 +93,34 @@ export class TasksComponent implements AfterViewInit {
       }
     };
   }
+  sortData(sort: Sort) {
+    const data = this.tasks.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'userId':
+          return compare(a.userId, b.userId, isAsc);
+        case 'id':
+          return compare(a.id, b.id, isAsc);
+        case 'title':
+          return compare(a.title, b.title, isAsc);
+        case 'completed':
+          return compare(a.completed, b.completed, isAsc);
+        default:
+          return 0;
+      }
+    });
+  }
+}
+
+function compare(a: number | string | boolean, b: number | string | boolean, isAsc: boolean): number {
+  if (typeof a === 'boolean' && typeof b === 'boolean') {
+    return (a === b ? 0 : a ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
