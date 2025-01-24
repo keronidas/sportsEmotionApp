@@ -1,1 +1,15 @@
-<p>{{id}}</p>
+@if(tasks()){
+
+<div>
+    <ul>
+        {{tasks()}}
+    </ul>
+</div>
+
+
+}@else {
+
+<ng-template #loading>
+    <p>Loading tasks...</p>
+</ng-template>
+}
