@@ -19,22 +19,22 @@ export class TasksComponent implements AfterViewInit {
   notCompleted: number = 0;
   public taskService = inject(TasksService);
   tasks: TasksDto[] = [];
-  displayedColumns: string[] = ['userId', 'id', 'title', 'completed'];
+  displayedColumns: string[] = ['userId', 'id', 'title', 'completed', 'button'];
   dataSource!: MatTableDataSource<TasksDto>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit(): void {
-    // Mover la suscripción aquí para acceder a tasks después de que se carguen
+
     this.taskService.getTasks().subscribe({
       next: (data) => {
-        // Asegúrate de que data sea un arreglo de tareas
+
         this.tasks = Array.isArray(data) ? data : [data];
         this.dataSource = new MatTableDataSource<TasksDto>(this.tasks);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
-        // Contar las tareas completadas y no completadas después de cargar los datos
+
         this.completed = 0;
         this.notCompleted = 0;
         this.tasks.forEach((element) => {
@@ -45,7 +45,7 @@ export class TasksComponent implements AfterViewInit {
           }
         });
 
-        // Actualizar el gráfico después de contar las tareas
+
         this.updateChart();
       },
       error: (err) => {
@@ -59,16 +59,16 @@ export class TasksComponent implements AfterViewInit {
     });
   }
 
-  // Función para actualizar los datos del gráfico
+
   updateChart() {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
 
     this.dataChartJs = {
-      labels: ['Completed', 'Not Completed'],
+      labels: ['Not Completed', 'Completed',],
       datasets: [
         {
-          data: [this.completed, this.notCompleted],
+          data: [this.notCompleted, this.completed],
           backgroundColor: [
             'rgb(105, 202, 96)',
             'rgb(12, 113, 134)'
