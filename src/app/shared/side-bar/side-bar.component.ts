@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RutasI } from '../../interfaces/menu.interface';
+import { RutasMenu } from '../../interfaces/menu.interface';
 import { RouteService } from '../../services/route.service';
 import { RouterModule } from '@angular/router';
 
@@ -11,5 +11,5 @@ import { RouterModule } from '@angular/router';
 })
 export class SideBarComponent {
   public routeService = inject(RouteService)
-  routes: RutasI[] = this.routeService.getRoutes()
+  routes: RutasMenu[] = this.routeService.getRoutes()
 }

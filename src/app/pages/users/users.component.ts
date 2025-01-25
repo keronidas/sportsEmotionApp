@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { UsersDto } from '../../interfaces/user.interface';
+import { RESTUser } from '../../interfaces/rest-user.interface';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { UsersService } from '../../services/users.service';
 })
 export class UsersComponent {
   public userService = inject(UsersService);
-  users: UsersDto[] = [];
+  users: RESTUser[] = [];
 
   ngAfterViewInit(): void {
     this.userService.getUsers().subscribe({

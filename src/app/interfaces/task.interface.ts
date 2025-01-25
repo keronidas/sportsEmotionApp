@@ -1,6 +1,6 @@
-export interface TasksDto {
-    userId:    number;
-    id:        number;
-    title:     string;
+export interface Task {
+    userId: number;
+    id: number;
+    title: string;
     completed: boolean;
 }

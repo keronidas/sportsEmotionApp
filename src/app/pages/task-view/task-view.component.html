@@ -1,15 +1,6 @@
-@if(tasks()){
+<div class="flex h-full w-full">
+    <h1 class="text-3xl text-start w-full capitalize p-4 "></h1>
+    <tasks-by-user-list [tasks]="tasks()"></tasks-by-user-list>
 
-<div>
-    <ul>
-        {{tasks()}}
-    </ul>
+
 </div>
-
-
-}@else {
-
-<ng-template #loading>
-    <p>Loading tasks...</p>
-</ng-template>
-}

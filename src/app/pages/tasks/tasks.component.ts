@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
 import { TasksService } from '../../services/tasks.service';
-import { TasksDto } from '../../interfaces/task.interface';
+import { RESTTask } from '../../interfaces/rest-task.interface';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ChartModule } from 'primeng/chart';
@@ -18,13 +18,13 @@ export class TasksComponent implements AfterViewInit {
 
 
   dataChartJs: any;
-  sortedData!: TasksDto[];
+  sortedData!: RESTTask[];
   options: any;
   completed: number = 0;
   notCompleted: number = 0;
-  tasks: TasksDto[] = [];
+  tasks: RESTTask[] = [];
   displayedColumns: string[] = ['userId', 'id', 'title', 'completed', 'button'];
-  dataSource!: MatTableDataSource<TasksDto>;
+  dataSource!: MatTableDataSource<RESTTask>;
 
   public taskService = inject(TasksService);
 
@@ -34,7 +34,7 @@ export class TasksComponent implements AfterViewInit {
       next: (data) => {
 
         this.tasks = Array.isArray(data) ? data : [data];
-        this.dataSource = new MatTableDataSource<TasksDto>(this.tasks);
+        this.dataSource = new MatTableDataSource<RESTTask>(this.tasks);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
