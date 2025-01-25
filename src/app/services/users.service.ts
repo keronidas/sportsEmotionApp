@@ -1,8 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { RESTUser } from '../interfaces/rest-user.interface';
+import { User } from '../interfaces/user.interface';
+import { UserMapper } from '../mappers/user.mapper';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +17,13 @@ export class UsersService {
 
 
 
-  getUsers(): Observable<RESTUser> {
-    return this.http.get<RESTUser>(this.apiUrl)
+  getUsers(): Observable<User[]> {
+    return this.http.get<RESTUser[]>(this.apiUrl)
+      .pipe(
+        map((resp) => UserMapper.mapRestUserArrayToUserArray(resp))
+      )
   }
 
 
-  
+
 }

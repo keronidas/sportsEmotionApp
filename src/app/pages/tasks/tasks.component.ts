@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { TasksService } from '../../services/tasks.service';
 import { RESTTask as Task } from '../../interfaces/rest-task.interface';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
