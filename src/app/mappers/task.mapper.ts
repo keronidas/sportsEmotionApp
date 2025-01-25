@@ -13,7 +13,7 @@ export class TaskMapper {
     }
 
     static mapRestTaskArrayToTaskArray(restTasks: RESTTask[]): Task[] {
-        return restTasks.map((task) => this.mapRestTaskToTask(task))
+        return restTasks.map(this.mapRestTaskToTask)
     }
 
 }

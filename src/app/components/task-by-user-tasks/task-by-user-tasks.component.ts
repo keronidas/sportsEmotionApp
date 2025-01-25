@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { RESTTask } from '../../interfaces/rest-task.interface';
+import { Task } from '../../interfaces/task.interface';
 
 @Component({
   selector: 'tasks-by-user-list',
@@ -9,7 +9,7 @@ import { RESTTask } from '../../interfaces/rest-task.interface';
 })
 export class TaskByUserTasksComponent {
 
-  tasks = input.required<RESTTask[]>()
+  tasks = input.required<Task[]>()
 
 
 }

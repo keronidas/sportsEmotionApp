@@ -1,8 +1,8 @@
 import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RESTTask } from '../../interfaces/rest-task.interface';
 import { TasksService } from '../../services/tasks.service';
 import { TaskByUserTasksComponent } from "../../components/task-by-user-tasks/task-by-user-tasks.component";
+import { Task } from '../../interfaces/task.interface';
 
 @Component({
   selector: 'app-task-view',
@@ -22,7 +22,7 @@ export class TaskViewComponent implements OnInit {
 
   isLoading = signal(false)
   isError = signal<string | null>(null)
-  tasks = signal<RESTTask[]>([])
+  tasks = signal<Task[]>([])
 
   onSearch() {
     if (this.isLoading()) return;

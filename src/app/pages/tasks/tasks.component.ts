@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { TasksService } from '../../services/tasks.service';
-import { RESTTask } from '../../interfaces/rest-task.interface';
+import { RESTTask as Task } from '../../interfaces/rest-task.interface';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ChartModule } from 'primeng/chart';
@@ -12,53 +12,74 @@ import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
-export class TasksComponent implements AfterViewInit {
+export class TasksComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  private taskService = inject(TasksService);
 
   dataChartJs: any;
-  sortedData!: RESTTask[];
+  sortedData!: Task[];
   options: any;
   completed: number = 0;
   notCompleted: number = 0;
-  tasks: RESTTask[] = [];
+  tasks = signal<Task[]>([])
+  isLoading = signal(false)
+  isError = signal<string | null>(null)
   displayedColumns: string[] = ['userId', 'id', 'title', 'completed', 'button'];
-  dataSource!: MatTableDataSource<RESTTask>;
+  dataSource!: MatTableDataSource<Task>;
 
-  public taskService = inject(TasksService);
 
-  ngAfterViewInit(): void {
-
+  ngOnInit(): void {
     this.taskService.getTasks().subscribe({
       next: (data) => {
+        const tasksArray = Array.isArray(data) ? data : [data];
+        this.tasks.set(tasksArray);
 
-        this.tasks = Array.isArray(data) ? data : [data];
-        this.dataSource = new MatTableDataSource<RESTTask>(this.tasks);
+        // Configurar la tabla de datos
+        this.dataSource = new MatTableDataSource<Task>(tasksArray);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
+        // Calcular tareas completadas y no completadas
+        this.completed = tasksArray.filter((task) => task.completed).length;
+        this.notCompleted = tasksArray.length - this.completed;
 
-        this.completed = 0;
-        this.notCompleted = 0;
-        this.tasks.forEach((element) => {
-          if (element.completed) {
-            this.completed++;
-          } else {
-            this.notCompleted++;
-          }
-        });
-
-
+        // Actualizar gráfico
         this.updateChart();
       },
       error: (err) => {
-        console.error('Error al obtener las tareas', err);
+        console.error('Error al obtener las tareas:', err);
+        this.isError.set('Error al obtener las tareas');
       },
       complete: () => {
         console.log('Petición completada');
         console.log('Tareas completadas:', this.completed);
         console.log('Tareas no completadas:', this.notCompleted);
+      }
+    });
+  }
+
+  sortData(sort: Sort) {
+    const data = [...this.tasks()];
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'userId':
+          return compare(a.userId, b.userId, isAsc);
+        case 'id':
+          return compare(a.id, b.id, isAsc);
+        case 'title':
+          return compare(a.title, b.title, isAsc);
+        case 'completed':
+          return compare(a.completed, b.completed, isAsc);
+        default:
+          return 0;
       }
     });
   }
@@ -93,29 +114,8 @@ export class TasksComponent implements AfterViewInit {
       }
     };
   }
-  sortData(sort: Sort) {
-    const data = this.tasks.slice();
-    if (!sort.active || sort.direction === '') {
-      this.sortedData = data;
-      return;
-    }
 
-    this.sortedData = data.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'userId':
-          return compare(a.userId, b.userId, isAsc);
-        case 'id':
-          return compare(a.id, b.id, isAsc);
-        case 'title':
-          return compare(a.title, b.title, isAsc);
-        case 'completed':
-          return compare(a.completed, b.completed, isAsc);
-        default:
-          return 0;
-      }
-    });
-  }
+
 }
 
 function compare(a: number | string | boolean, b: number | string | boolean, isAsc: boolean): number {

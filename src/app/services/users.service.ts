@@ -8,11 +8,17 @@ import { RESTUser } from '../interfaces/rest-user.interface';
   providedIn: 'root'
 })
 export class UsersService {
- private http=inject(HttpClient)
+
+  private http = inject(HttpClient)
+
   private apiUrl = environment.apiUrl + '/users';
- 
+
+
 
   getUsers(): Observable<RESTUser> {
     return this.http.get<RESTUser>(this.apiUrl)
   }
+
+
+  
 }

@@ -14,6 +14,6 @@ export class UserMapper {
     }
 
     static mapRestUserArrayToUserArray(restUsers: RESTUser[]): User[] {
-        return restUsers.map((task) => this.mapRestUserToUser(task))
+        return restUsers.map(this.mapRestUserToUser)
     }
 }
