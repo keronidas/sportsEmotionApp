@@ -24,6 +24,13 @@ export class UsersService {
       )
   }
 
+  getUserById(id: string | number): Observable<User> {
+    return this.http.get<RESTUser>(`${this.apiUrl}/${id}`)
+      .pipe(
+        map((resp) => UserMapper.mapRestUserToUser(resp))
+      )
+  }
+
 
 
 }

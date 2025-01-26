@@ -24,8 +24,7 @@ export class TasksComponent implements OnInit {
   completed: number = 0;
   notCompleted: number = 0;
   tasks = signal<Task[]>([])
-  isLoading = signal(false)
-  isError = signal<string | null>(null)
+
   displayedColumns: string[] = ['userId', 'id', 'title', 'completed', 'button'];
   dataSource!: MatTableDataSource<Task>;
 
@@ -50,7 +49,6 @@ export class TasksComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al obtener las tareas:', err);
-        this.isError.set('Error al obtener las tareas');
       },
       complete: () => {
         console.log('Petición completada');
