@@ -1,9 +1,9 @@
-<div class="flex w-full h-full justify-start items-center flex-col">
-    <h1 class="text-3xl text-start w-full capitalize p-4 text-second font-bold ">Tareas</h1>
+<div class="flex w-full h-full justify-start items-center flex-col bg-green-50 p-6 rounded-3xl shadow-2xl ">
+    <h1 class="text-3xl text-start w-full capitalize text-second font-bold ">Tareas</h1>
     <div class="flex w-full h-full justify-evenly items-center flex-row">
 
 
-        <div class="mat-elevation-z8 w-3/5 ">
+        <div class="mat-elevation-z8 w-3/5 shadow-2xl rounded-3xl">
             <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
 
                 <!-- UserId Column -->
