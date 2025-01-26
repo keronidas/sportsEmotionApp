@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TaskViewComponent } from './task-view.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('TaskViewComponent', () => {
   let component: TaskViewComponent;
@@ -8,7 +9,7 @@ describe('TaskViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TaskViewComponent]
+      imports: [TaskViewComponent,HttpClientModule]
     })
     .compileComponents();
 
@@ -20,4 +21,9 @@ describe('TaskViewComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should be created with default values',()=>{
+    console.log(component.id())
+    expect(component.id()).toBe("")
+  })
 });

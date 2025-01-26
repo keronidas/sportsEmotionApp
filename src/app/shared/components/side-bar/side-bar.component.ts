@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { RutasMenu } from '../../interfaces/menu.interface';
-import { RouteService } from '../../services/route.service';
+import { RutasMenu } from '../../../interfaces/menu.interface';
+import { RouteService } from '../../../services/route.service';
 import { RouterModule } from '@angular/router';
 
 @Component({

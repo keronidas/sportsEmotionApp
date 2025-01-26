@@ -10,7 +10,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ChartModule } from 'primeng/chart';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
-import { BackButtonComponent } from "../../shared/back-button/back-button.component";
+import { BackButtonComponent } from "../../shared/components/back-button/back-button.component";
 
 @Component({
   selector: 'app-task-view',
@@ -32,7 +32,7 @@ export class TaskViewComponent implements OnInit {
   completed: number = 0;
   notCompleted: number = 0;
 
-  id = signal<string | number>("")
+  public id = signal<string | number>("")
   tasks = signal<Task[]>([])
   user = signal<User>({
     userId: '',
