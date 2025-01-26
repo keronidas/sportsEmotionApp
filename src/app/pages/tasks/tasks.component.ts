@@ -112,9 +112,23 @@ export class TasksComponent implements OnInit {
       }
     };
   }
+  changeStatusTask(taskId: number) {
+    const task = this.tasks().find(t => t.id === taskId);
+    if (task) {
+      task.completed = !task.completed;
+      this.tasks.set([...this.tasks()]);
+      // Calcular tareas completadas y no completadas
+      this.completed = this.tasks().filter((task) => task.completed).length;
+      this.notCompleted = this.tasks().length - this.completed;
 
+      // Actualizar gráfico
+      this.updateChart();
+    }
+  }
 
 }
+
+
 
 function compare(a: number | string | boolean, b: number | string | boolean, isAsc: boolean): number {
   if (typeof a === 'boolean' && typeof b === 'boolean') {

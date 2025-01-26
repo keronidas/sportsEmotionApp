@@ -78,6 +78,7 @@ export class TaskViewComponent implements OnInit {
       }
     );
   }
+
   sortData(sort: Sort) {
     const data = [...this.tasks()];
     if (!sort.active || sort.direction === '') {
@@ -108,13 +109,13 @@ export class TaskViewComponent implements OnInit {
     const textColor = documentStyle.getPropertyValue('--text-color');
 
     this.dataChartJs = {
-      labels: ['Not Completed', 'Completed',],
+      labels: ['No completadas', 'Completadas',],
       datasets: [
         {
           data: [this.notCompleted, this.completed],
           backgroundColor: [
+            'rgb(255,0,0)',
             'rgb(105, 202, 96)',
-            'rgb(12, 113, 134)'
           ],
           hoverOffset: 4
         }
@@ -132,7 +133,20 @@ export class TaskViewComponent implements OnInit {
       }
     };
   }
+  changeStatusTask(taskId: number) {
+    const task = this.tasks().find(t => t.id === taskId);
+    if (task) {
+      task.completed = !task.completed;
+      this.tasks.set([...this.tasks()]);
 
+      // Calcular tareas completadas y no completadas
+      this.completed = this.tasks().filter((task) => task.completed).length;
+      this.notCompleted = this.tasks().length - this.completed;
+
+      // Actualizar gráfico
+      this.updateChart();
+    }
+  }
 
 }
 
