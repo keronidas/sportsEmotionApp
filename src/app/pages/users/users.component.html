@@ -1,14 +1,14 @@
 <div class="flex w-full h-full justify-start items-center flex-col">
-    <h1 class="text-3xl text-start w-full capitalize p-4 text-second font-bold">users</h1>
+    <h1 class="text-3xl text-start w-full capitalize p-4 text-second font-bold">Usuarios</h1>
     <table class="w-4/5 table-auto p-6 border-separate border-spacing-y-1">
         <thead>
             <tr class=" text-gray-600">
-                <th class="px-4 py-2 border-b text-left font-light">User Id</th>
-                <th class="px-4 py-2 border-b text-left font-light">Name</th>
-                <th class="px-4 py-2 border-b text-left font-light">Username</th>
+                <th class="px-4 py-2 border-b text-left font-light">Id Usuario</th>
+                <th class="px-4 py-2 border-b text-left font-light">Nombre</th>
+                <th class="px-4 py-2 border-b text-left font-light">Alias</th>
                 <th class="px-4 py-2 border-b text-left font-light">Email</th>
-                <th class="px-4 py-2 border-b text-left font-light">Phone</th>
-                <th class="px-4 py-2 border-b text-left font-light">Check Task</th>
+                <th class="px-4 py-2 border-b text-left font-light">Nº Telefono</th>
+                <th class="px-4 py-2 border-b text-left font-light">Comprobar tareas</th>
             </tr>
         </thead>
         <tbody class="gap-y-1">
@@ -21,7 +21,7 @@
                 <td class="px-4 py-2  ">{{user.phone}}</td>
                 <td class="px-4 py-2  "> <button
                         class="bg-[#0e7280] py-2 px-6 rounded-2xl font-bold text-white hover:bg-slate-800"
-                        [routerLink]="'/tasks/' + user.userId">Check</button>
+                        [routerLink]="'/tasks/' + user.userId">Comprobar</button>
                 </td>
             </tr>
             }

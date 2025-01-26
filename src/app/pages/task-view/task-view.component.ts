@@ -10,12 +10,13 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ChartModule } from 'primeng/chart';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import { BackButtonComponent } from "../../shared/back-button/back-button.component";
 
 @Component({
   selector: 'app-task-view',
   templateUrl: './task-view.component.html',
   styleUrls: ['./task-view.component.scss'],
-  imports: [MatProgressSpinnerModule, MatTableModule, MatPaginatorModule, ChartModule, MatSortModule]
+  imports: [MatProgressSpinnerModule, MatTableModule, MatPaginatorModule, ChartModule, MatSortModule, BackButtonComponent, BackButtonComponent]
 })
 export class TaskViewComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -109,7 +110,7 @@ export class TaskViewComponent implements OnInit {
     const textColor = documentStyle.getPropertyValue('--text-color');
 
     this.dataChartJs = {
-      labels: ['No completadas', 'Completadas',],
+      labels: ['Sin completar', 'Completadas',],
       datasets: [
         {
           data: [this.notCompleted, this.completed],

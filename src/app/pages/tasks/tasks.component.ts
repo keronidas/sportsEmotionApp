@@ -88,13 +88,13 @@ export class TasksComponent implements OnInit {
     const textColor = documentStyle.getPropertyValue('--text-color');
 
     this.dataChartJs = {
-      labels: ['Not Completed', 'Completed',],
+      labels: ['Sin completar', 'Completadas',],
       datasets: [
         {
           data: [this.notCompleted, this.completed],
           backgroundColor: [
+            'rgb(255,0,0)',
             'rgb(105, 202, 96)',
-            'rgb(12, 113, 134)'
           ],
           hoverOffset: 4
         }
