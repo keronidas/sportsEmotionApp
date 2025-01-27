@@ -26,11 +26,19 @@ export class TaskViewComponent implements OnInit {
   private taskService = inject(TasksService);
   private userService = inject(UsersService);
 
+  // Variables de chart.js
   dataChartJs: any;
   sortedData!: Task[];
   options: any;
   completed: number = 0;
   notCompleted: number = 0;
+
+  // Variables de la tabla de angular material
+
+  displayedColumns: string[] = ['title', 'completed', 'button'];
+  dataSource!: MatTableDataSource<Task>;
+
+  // signals
 
   public id = signal<string | number>("")
   tasks = signal<Task[]>([])
@@ -42,8 +50,6 @@ export class TaskViewComponent implements OnInit {
     phone: ''
   })
 
-  displayedColumns: string[] = ['title', 'completed', 'button'];
-  dataSource!: MatTableDataSource<Task>;
 
 
 

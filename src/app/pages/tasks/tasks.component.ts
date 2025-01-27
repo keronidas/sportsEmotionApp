@@ -18,16 +18,21 @@ export class TasksComponent implements OnInit {
 
   private taskService = inject(TasksService);
 
+  // Variables de chart.js
   dataChartJs: any;
   sortedData!: Task[];
   options: any;
   completed: number = 0;
   notCompleted: number = 0;
-  tasks = signal<Task[]>([])
+
+  // Variables de la tabla de angular material
 
   displayedColumns: string[] = ['userId', 'id', 'title', 'completed', 'button'];
   dataSource!: MatTableDataSource<Task>;
+  
+// signals
 
+  tasks = signal<Task[]>([])
 
   ngOnInit(): void {
     this.taskService.getTasks().subscribe({

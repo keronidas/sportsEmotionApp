@@ -11,6 +11,9 @@ import { RouterLink } from '@angular/router';
 })
 export class UsersComponent implements OnInit {
   public userService = inject(UsersService);
+
+// Signals
+
   users = signal<User[]>([])
 
   ngOnInit(): void {
