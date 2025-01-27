@@ -10,9 +10,9 @@ describe('UsersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UsersComponent,RouterTestingModule,HttpClientTestingModule]
+      imports: [UsersComponent, RouterTestingModule, HttpClientTestingModule]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
@@ -21,5 +21,9 @@ describe('UsersComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('signal users should be created with default values', () => {
+    console.log(component.users());
+    expect(component.users()).toEqual([]);
   });
 });
