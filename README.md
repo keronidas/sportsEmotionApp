@@ -2,6 +2,12 @@
 
 Aplicación realizada por Diego Julián Rodríguez para la prueba técnica de Sports Emotion.
 
+
+## Comandos a ejecutar
+1. Usar `npm i`
+2. Usar `ng serve -o`
+
+
 ## Diseño y version de la App
 
 La aplicación se ha creado con la versión de Angular 19. Se ha creado con componentes standalone en vez de un paradigma más enfocado a módulos. También se ha implementado el uso de señales.
